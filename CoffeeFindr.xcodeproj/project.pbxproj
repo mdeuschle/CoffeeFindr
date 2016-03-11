@@ -8,22 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		A869CC7A1C9355D8009E2AA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A869CC791C9355D8009E2AA1 /* AppDelegate.swift */; };
-		A869CC7C1C9355D8009E2AA1 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A869CC7B1C9355D8009E2AA1 /* FirstViewController.swift */; };
-		A869CC7E1C9355D8009E2AA1 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A869CC7D1C9355D8009E2AA1 /* SecondViewController.swift */; };
 		A869CC811C9355D8009E2AA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A869CC7F1C9355D8009E2AA1 /* Main.storyboard */; };
 		A869CC831C9355D8009E2AA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A869CC821C9355D8009E2AA1 /* Assets.xcassets */; };
 		A869CC861C9355D8009E2AA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A869CC841C9355D8009E2AA1 /* LaunchScreen.storyboard */; };
+		A869CC8E1C93572E009E2AA1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A869CC8D1C93572E009E2AA1 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A869CC761C9355D8009E2AA1 /* CoffeeFindr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoffeeFindr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A869CC791C9355D8009E2AA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A869CC7B1C9355D8009E2AA1 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		A869CC7D1C9355D8009E2AA1 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		A869CC801C9355D8009E2AA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A869CC821C9355D8009E2AA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A869CC851C9355D8009E2AA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A869CC871C9355D8009E2AA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A869CC8D1C93572E009E2AA1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A869CC8E1C93572E009E2AA1 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +39,7 @@
 		A869CC6D1C9355D8009E2AA1 = {
 			isa = PBXGroup;
 			children = (
+				A869CC8D1C93572E009E2AA1 /* MapKit.framework */,
 				A869CC781C9355D8009E2AA1 /* CoffeeFindr */,
 				A869CC771C9355D8009E2AA1 /* Products */,
 			);
@@ -57,8 +57,6 @@
 			isa = PBXGroup;
 			children = (
 				A869CC791C9355D8009E2AA1 /* AppDelegate.swift */,
-				A869CC7B1C9355D8009E2AA1 /* FirstViewController.swift */,
-				A869CC7D1C9355D8009E2AA1 /* SecondViewController.swift */,
 				A869CC7F1C9355D8009E2AA1 /* Main.storyboard */,
 				A869CC821C9355D8009E2AA1 /* Assets.xcassets */,
 				A869CC841C9355D8009E2AA1 /* LaunchScreen.storyboard */,
@@ -99,6 +97,11 @@
 				TargetAttributes = {
 					A869CC751C9355D8009E2AA1 = {
 						CreatedOnToolsVersion = 7.2;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -138,9 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A869CC7E1C9355D8009E2AA1 /* SecondViewController.swift in Sources */,
 				A869CC7A1C9355D8009E2AA1 /* AppDelegate.swift in Sources */,
-				A869CC7C1C9355D8009E2AA1 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
