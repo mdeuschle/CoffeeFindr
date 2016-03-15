@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class CoffeePlace {
+class CoffeePlace: NSObject {
 
     let name: String?
     let location: CLLocation
