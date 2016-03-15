@@ -23,6 +23,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = "Coffee Findr"
+
         mapView2.showsUserLocation = true
 
         addCoffeePlacesToMap()

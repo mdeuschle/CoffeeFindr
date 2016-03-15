@@ -16,6 +16,7 @@
 		A869CC961C936219009E2AA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A869CC951C936219009E2AA1 /* CoreLocation.framework */; };
 		A8F3971D1C9612FB00178A21 /* CoffeePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F3971C1C9612FB00178A21 /* CoffeePlace.swift */; };
 		A8F397251C97962100178A21 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F397241C97962100178A21 /* MapViewController.swift */; };
+		A8F397271C98919400178A21 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F397261C98919400178A21 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		A869CC951C936219009E2AA1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A8F3971C1C9612FB00178A21 /* CoffeePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoffeePlace.swift; path = ../CoffeePlace.swift; sourceTree = "<group>"; };
 		A8F397241C97962100178A21 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = ../MapViewController.swift; sourceTree = "<group>"; };
+		A8F397261C98919400178A21 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				A8F397241C97962100178A21 /* MapViewController.swift */,
 				A8F3971C1C9612FB00178A21 /* CoffeePlace.swift */,
 				A869CC931C935D61009E2AA1 /* ListViewController.swift */,
+				A8F397261C98919400178A21 /* TableViewCell.swift */,
 				A869CC7F1C9355D8009E2AA1 /* Main.storyboard */,
 				A869CC821C9355D8009E2AA1 /* Assets.xcassets */,
 				A869CC841C9355D8009E2AA1 /* LaunchScreen.storyboard */,
@@ -154,6 +157,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8F397271C98919400178A21 /* TableViewCell.swift in Sources */,
 				A869CC7A1C9355D8009E2AA1 /* AppDelegate.swift in Sources */,
 				A869CC941C935D61009E2AA1 /* ListViewController.swift in Sources */,
 				A8F3971D1C9612FB00178A21 /* CoffeePlace.swift in Sources */,

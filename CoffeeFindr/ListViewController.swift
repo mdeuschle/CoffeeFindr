@@ -28,6 +28,8 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+
         mapView1.showsUserLocation = true
 
         mapView1.delegate = self
@@ -38,7 +40,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.automaticallyAdjustsScrollViewInsets = false
 
         // remove tableview lines
-        self.coffeeTableView.separatorColor = UIColor.clearColor()
+//        self.coffeeTableView.separatorColor = UIColor.clearColor()
 
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
@@ -111,6 +113,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if currentLocation.verticalAccuracy < 1000 && currentLocation.horizontalAccuracy < 1000 {
 
             locationManager.stopUpdatingLocation()
+            
             print("Current location is: \(currentLocation)")
             findCoffeePlaces(currentLocation)
         }
@@ -133,7 +136,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell")
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! TableViewCell
 
         let coffeePlace = self.coffeeArray[indexPath.row]
 
@@ -142,7 +145,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
             coffeeShopName = coffeePlaceName
         }
 
-        cell?.textLabel?.text = coffeeShopName
+        cell.titleLabel.text = coffeeShopName
 
 
         if let coffeePlaceStreetNumber = coffeePlace.streetNumber {
@@ -157,14 +160,14 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         fullStreetName = streetNumber + " " + streetName
 
-        cell?.detailTextLabel?.text = fullStreetName
+        cell.subtitleLabel.text = fullStreetName
 
-//        let miles = (coffeePlace.distanceFromLocation(self.currentLocation) * 0.000621371)
-//        let coffeeMiles  = Double(round(10 * miles)/10)
-//        
-//        cell?.detailTextLabel?.text = "\(coffeeMiles) mi"
+        let miles = (coffeePlace.distanceFromLocation(self.currentLocation) * 0.000621371)
+        let coffeeMiles  = Double(round(10 * miles)/10)
 
-        return cell!
+        cell.directionsLabel.text = "\(coffeeMiles) mi"
+
+        return cell
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
