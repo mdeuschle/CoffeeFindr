@@ -18,6 +18,13 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let locationManager = CLLocationManager()
     var currentLocation = CLLocation()
 
+    var coffeeShopName = ""
+    var streetNumber = ""
+    var streetName = ""
+    var fullStreetName = ""
+    var coffeeShopLat = ""
+    var coffeeShopLong = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,7 +55,12 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         for coffeePlace in self.coffeeArray {
             let annotation = MKPointAnnotation()
             annotation.coordinate = coffeePlace.location.coordinate
-            annotation.title = coffeePlace.name
+
+            if let coffeePlaceName = coffeePlace.name {
+
+                annotation.title = coffeePlaceName
+            }
+
             self.mapView1.addAnnotation(annotation)
         }
     }
@@ -57,7 +69,6 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
 
         if let loc = userLocation.location {
-//            centerMapOnLocation(loc)
             findCoffeePlaces(loc)
         }
     }
@@ -74,7 +85,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = "Coffee"
-        request.region = MKCoordinateRegionMakeWithDistance(location.coordinate, 2000, 2000)
+        request.region = MKCoordinateRegionMakeWithDistance(location.coordinate, 3000, 3000)
         mapView1.setRegion(request.region, animated: true)
         let search = MKLocalSearch(request: request)
         search.startWithCompletionHandler { (response: MKLocalSearchResponse?, error: NSError?) -> Void in
@@ -125,12 +136,33 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell")
 
         let coffeePlace = self.coffeeArray[indexPath.row]
-        cell?.textLabel?.text = coffeePlace.name
-        
-        let miles = (coffeePlace.distanceFromLocation(self.currentLocation) * 0.000621371)
-        let coffeeMiles  = Double(round(10 * miles)/10)
-        
-        cell?.detailTextLabel?.text = "\(coffeeMiles) mi"
+
+        if let coffeePlaceName = coffeePlace.name
+        {
+            coffeeShopName = coffeePlaceName
+        }
+
+        cell?.textLabel?.text = coffeeShopName
+
+
+        if let coffeePlaceStreetNumber = coffeePlace.streetNumber {
+
+            streetNumber = coffeePlaceStreetNumber
+        }
+
+        if let coffeePlaceStreetName = coffeePlace.streetName {
+
+            streetName = coffeePlaceStreetName
+        }
+
+        fullStreetName = streetNumber + " " + streetName
+
+        cell?.detailTextLabel?.text = fullStreetName
+
+//        let miles = (coffeePlace.distanceFromLocation(self.currentLocation) * 0.000621371)
+//        let coffeeMiles  = Double(round(10 * miles)/10)
+//        
+//        cell?.detailTextLabel?.text = "\(coffeeMiles) mi"
 
         return cell!
     }
@@ -140,12 +172,22 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let dvc = segue.destinationViewController as! MapViewController
 
         let mapCoffeeArray = self.coffeeArray
-
         dvc.mapCoffeeArray = mapCoffeeArray
 
-        let curLocation = currentLocation
-
+        let curLocation = self.currentLocation
         dvc.curLocation = curLocation
-        
+
     }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+        let coffeePlace = self.coffeeArray[indexPath.row]
+
+        coffeeShopLat = String(coffeePlace.latitude)
+
+        coffeeShopLong = String(coffeePlace.longitude)
+
+        UIApplication.sharedApplication().openURL(NSURL(string: "http://maps.apple.com/maps?daddr=\(coffeeShopLat),\(coffeeShopLong)")!)
+    }
+    
 }
