@@ -21,6 +21,8 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        mapView1.showsUserLocation = true
+
         mapView1.delegate = self
 
         self.title = "Coffee Findr"
@@ -41,7 +43,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
 
-    func addCoffeePlacesToMap () {
+    func addCoffeePlacesToMap() {
 
         for coffeePlace in self.coffeeArray {
             let annotation = MKPointAnnotation()
@@ -140,6 +142,10 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let mapCoffeeArray = self.coffeeArray
 
         dvc.mapCoffeeArray = mapCoffeeArray
+
+        let curLocation = currentLocation
+
+        dvc.curLocation = curLocation
         
     }
 }
