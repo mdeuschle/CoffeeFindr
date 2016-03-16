@@ -69,8 +69,8 @@
 			isa = PBXGroup;
 			children = (
 				A869CC791C9355D8009E2AA1 /* AppDelegate.swift */,
-				A8F397241C97962100178A21 /* MapViewController.swift */,
 				A8F3971C1C9612FB00178A21 /* CoffeePlace.swift */,
+				A8F397241C97962100178A21 /* MapViewController.swift */,
 				A869CC931C935D61009E2AA1 /* ListViewController.swift */,
 				A8F397261C98919400178A21 /* TableViewCell.swift */,
 				A869CC7F1C9355D8009E2AA1 /* Main.storyboard */,
@@ -278,6 +278,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mattdeuschle.CoffeeFindr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -289,6 +290,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mattdeuschle.CoffeeFindr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

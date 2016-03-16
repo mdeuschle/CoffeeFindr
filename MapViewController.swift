@@ -44,7 +44,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if pin == nil {
 
             pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-
             pin!.canShowCallout = true
             pin!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
 
@@ -52,9 +51,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
             pin!.annotation = annotation
         }
+
         return pin
     }
-
 
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView,
         calloutAccessoryControlTapped control: UIControl) {
@@ -69,32 +68,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             MKMapItem.openMapsWithItems(mapItems, launchOptions:launchOptions)
     }
 
-
     func addCoffeePlacesToMap() {
 
         for coffeePlace in self.mapCoffeeArray {
 
             let annotation = MKPointAnnotation()
-
             annotation.coordinate = coffeePlace.location.coordinate
-
             if let coffeePlaceName = coffeePlace.name {
 
                 annotation.title = coffeePlaceName
             }
-
             if let stNumber = coffeePlace.streetNumber {
 
                 streetNumber = stNumber
             }
-
             if let stName = coffeePlace.streetName {
 
                 streetName = stName
             }
-            
             annotation.subtitle = streetNumber + " " + streetName
-
             self.mapView2.addAnnotation(annotation)
         }
     }

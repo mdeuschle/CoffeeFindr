@@ -28,13 +28,12 @@ class CoffeePlace {
         latitude = (mapItem.placemark.location?.coordinate.latitude)!
         longitude = (mapItem.placemark.location?.coordinate.longitude)!
         self.mapItem = mapItem
-    
     }
 
     func distanceFromLocation(location: CLLocation) -> Double {
+
         return location.distanceFromLocation(self.location)
     }
-
 }
 
 

@@ -10,17 +10,13 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
 
-
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subtitleLabel: UILabel!
-    @IBOutlet var directionsLabel: UILabel!
+    @IBOutlet var milesLabel: UILabel!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
 
-
     }
-
-
-
 }

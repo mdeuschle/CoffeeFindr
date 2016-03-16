@@ -24,6 +24,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var fullStreetName = ""
     var coffeeShopLat = ""
     var coffeeShopLong = ""
+    var mapItems = [MKMapItem]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,16 +32,10 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
 
         mapView1.showsUserLocation = true
-
         mapView1.delegate = self
 
         self.title = "Coffee Findr"
-
-        // remove space on top of cell
         self.automaticallyAdjustsScrollViewInsets = false
-
-        // remove tableview lines
-//        self.coffeeTableView.separatorColor = UIColor.clearColor()
 
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
@@ -55,18 +50,12 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func addCoffeePlacesToMap() {
 
         for coffeePlace in self.coffeeArray {
+
             let annotation = MKPointAnnotation()
             annotation.coordinate = coffeePlace.location.coordinate
-
-            if let coffeePlaceName = coffeePlace.name {
-
-                annotation.title = coffeePlaceName
-            }
-
             self.mapView1.addAnnotation(annotation)
         }
     }
-
 
     func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
 
@@ -76,9 +65,11 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func locationAuthStatus() {
+
         if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
             mapView1.showsUserLocation = true
         } else {
+
             locationManager.requestWhenInUseAuthorization()
         }
     }
@@ -92,11 +83,14 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let search = MKLocalSearch(request: request)
         search.startWithCompletionHandler { (response: MKLocalSearchResponse?, error: NSError?) -> Void in
 
-            let mapItems = response?.mapItems
+            if let coffeeMapItems = response?.mapItems {
 
-            self.coffeeArray = (mapItems?.map({ CoffeePlace(mapItem: $0) }))!
+                self.mapItems = coffeeMapItems
+            }
+
+            self.coffeeArray = (self.mapItems.map({ CoffeePlace(mapItem: $0) }))
             self.coffeeArray.sortInPlace({ (coffee1, coffee2) -> Bool in
-                coffee1.distanceFromLocation(self.currentLocation) < coffee2   .distanceFromLocation(self.currentLocation)
+                coffee1.distanceFromLocation(self.currentLocation) < coffee2.distanceFromLocation(self.currentLocation)
             })
             self.coffeeTableView.reloadData()
             self.addCoffeePlacesToMap()
@@ -113,7 +107,6 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if currentLocation.verticalAccuracy < 1000 && currentLocation.horizontalAccuracy < 1000 {
 
             locationManager.stopUpdatingLocation()
-            
             print("Current location is: \(currentLocation)")
             findCoffeePlaces(currentLocation)
         }
@@ -137,35 +130,27 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! TableViewCell
-
         let coffeePlace = self.coffeeArray[indexPath.row]
-
         if let coffeePlaceName = coffeePlace.name
         {
             coffeeShopName = coffeePlaceName
         }
-
         cell.titleLabel.text = coffeeShopName
-
-
         if let coffeePlaceStreetNumber = coffeePlace.streetNumber {
 
             streetNumber = coffeePlaceStreetNumber
         }
-
         if let coffeePlaceStreetName = coffeePlace.streetName {
 
             streetName = coffeePlaceStreetName
         }
-
         fullStreetName = streetNumber + " " + streetName
-
         cell.subtitleLabel.text = fullStreetName
 
         let miles = (coffeePlace.distanceFromLocation(self.currentLocation) * 0.000621371)
         let coffeeMiles  = Double(round(10 * miles)/10)
 
-        cell.directionsLabel.text = "\(coffeeMiles) mi"
+        cell.milesLabel.text = "\(coffeeMiles) mi"
 
         return cell
     }
@@ -179,18 +164,16 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         let curLocation = self.currentLocation
         dvc.curLocation = curLocation
-
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
+        
         let coffeePlace = self.coffeeArray[indexPath.row]
-
         coffeeShopLat = String(coffeePlace.latitude)
-
         coffeeShopLong = String(coffeePlace.longitude)
-
         UIApplication.sharedApplication().openURL(NSURL(string: "http://maps.apple.com/maps?daddr=\(coffeeShopLat),\(coffeeShopLong)")!)
-    }
-    
+
+        coffeeTableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }    
 }
+
