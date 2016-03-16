@@ -36,7 +36,7 @@
                                 <color key="sectionIndexBackgroundColor" red="0.2470588235" green="0.58039215690000001" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="100" id="cc4-MH-cHh" customClass="TableViewCell" customModule="CoffeeFindr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="383" height="100"/>
+                                        <rect key="frame" x="0.0" y="28" width="383" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cc4-MH-cHh" id="sjs-Tj-MFW">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="99"/>
